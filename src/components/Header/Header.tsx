@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { ThemeContext } from "../../context/themeContext";
+import { ThemeContext } from "../../context/theme-context";
 
 const Header = () => {
     const [switchTheme, setSwitchTheme] = useState(true);
@@ -41,7 +41,7 @@ const Header = () => {
                 </div>
 
                 <div className="container-profile">
-                    <a href="/sign-in"><i className="fas fa-user-circle"></i>Sign</a>
+                    <a href="/sign-in"><i className="fas fa-user-circle"></i>Sign In</a>
                 </div>
             </div>
         </header>

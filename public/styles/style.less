@@ -3,9 +3,9 @@ html {
 }
 
 body {
-    padding: 0;
-    margin: 0;
-    font-family: 'Ubuntu', sans-serif;
+  padding: 0;
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .body__theme {
@@ -52,6 +52,29 @@ body {
     transform: scale(0.9);
   }
 }
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0px);
+  }
+
+  25% {
+    transform: translateY(-8px) rotateZ(360deg);
+  }
+
+  50% {
+    transform: translateY(0px) rotateY(360deg);
+  }
+
+  75% {
+    transform: translateY(-8px) rotateX(360deg);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 
 /* Header */
 header {
@@ -241,6 +264,8 @@ main {
   max-width: 1920px;
 
   .main__container {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -354,6 +379,204 @@ main {
         color: wheat;
       }
     }
+
+    .main__signup, .main__signin {
+      margin-top: 80px;
+      padding-bottom: 130px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .signup-header {
+        margin: 20px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        color: rgb(141, 115, 182);
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-transform: uppercase;
+
+        p {
+          margin: 0;
+        }
+
+        i {
+          margin: 5px;
+          font-size: 2rem;
+
+          animation-name: bounce;
+          animation-duration: 2s;
+          animation-iteration-count: infinite;
+        }
+      }
+
+      .signup-form {
+        form {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          label {
+            padding: 10px;
+
+            input {
+              width: 400px;
+              height: 35px;
+
+              padding: 5px;
+
+              outline: none;
+              border: none;
+              border-bottom: 2px solid rgb(132, 106, 173);
+              background-color: rgba(0, 0, 0, 0);
+              box-sizing: border-box;
+
+              font-size: 0.9rem;
+              color: rgb(132, 106, 173);
+
+              &::placeholder {
+                color: rgb(132, 106, 173);
+              }
+            }
+          }
+
+          button {
+            margin-top: 45px;
+            width: 215px;
+            height: 46px;
+
+            background-color: rgb(132, 106, 173);
+            border: none;
+            outline: none;
+            
+
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: wheat;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .signin-form {
+        form {
+          padding-bottom: 85px;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          .footer-title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+
+          a {
+            margin: 5px;
+            text-decoration: none;
+            color: rgb(132, 106, 173);
+            font-size: 1.1rem;
+            font-weight: 500;
+          }
+
+          label {
+            padding: 10px;
+
+            input {
+              width: 400px;
+              height: 35px;
+
+              padding: 5px;
+
+              outline: none;
+              border: none;
+              border-bottom: 2px solid rgb(132, 106, 173);
+              background-color: rgba(0, 0, 0, 0);
+              box-sizing: border-box;
+
+              font-size: 0.9rem;
+              color: rgb(132, 106, 173);
+
+              &::placeholder {
+                color: rgb(132, 106, 173);
+              }
+            }
+          }
+
+          button {
+            margin-top: 45px;
+            width: 215px;
+            height: 45px;
+
+            background-color: rgb(132, 106, 173);
+            border: none;
+            outline: none;
+            
+
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: wheat;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+    .main__modal {
+      position: absolute;
+      z-index: 1;
+
+      width: 100%;
+      height: 100%;
+
+      background-color: rgba(0, 0, 0, 0.8);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .modal-window {
+        position: absolute;
+        z-index: 2;
+
+        width: 350px;
+        height: 100px;
+        background-color: rgb(127, 102, 167);
+        color: wheat;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+
+        p {
+          padding: 20px;
+          font-size: 1.1rem;
+          font-weight: 700;
+        }
+      }
+    }
   }
 }
 
@@ -362,7 +585,6 @@ footer {
   max-width: 1920px;
 
   .footer__container {
-    margin-top: 80px;
     height: 300px;
 
     display: flex;
