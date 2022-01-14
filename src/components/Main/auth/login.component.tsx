@@ -16,7 +16,6 @@ const LoginComponent = () => {
         e.preventDefault();
         try {
             const data = { 'userEmail': _useremail.value, 'userPassword': _userpassword.value };
-            console.log(data);
             const response = await fetch("http://localhost:5000/user-login", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -27,8 +26,9 @@ const LoginComponent = () => {
 
             if (jsonData.status) {
                 localStorage.setItem('user', JSON.stringify(jsonData.user));
+                localStorage.setItem('status_login', JSON.stringify(jsonData.status));
                 setTimeout(() => {
-                    navigate('/', { replace: true });
+                    navigate('/profile', { replace: true });
                 }, 1500);
             } else {
                 setStatus(true);
@@ -56,10 +56,10 @@ const LoginComponent = () => {
                 <div className="signin-form">
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="email_user">
-                            <input id="email_user" type="email" placeholder="Ваш логин" {..._useremail} style={_useremail.value.length <= 0 ? { borderBottom: _useremail._errorstyle } : { borderBottom: '1px solid #14142B' }} />
+                            <input id="email_user" type="email" placeholder="Ваш логин" {..._useremail} style={_useremail.value.length <= 0 ? { borderBottom: _useremail._errorstyle, color: '#EB0055' } : { borderBottom: '1px solid #14142B' }} />
                         </label>
                         <label htmlFor="password_user">
-                            <input id="password_user" type="password" placeholder="Ваш пароль" {..._userpassword} style={_userpassword.value.length <= 0 ? { borderBottom: _userpassword._errorstyle } : { borderBottom: '1px solid #14142B' }} />
+                            <input id="password_user" type="password" placeholder="Ваш пароль" {..._userpassword} style={_userpassword.value.length <= 0 ? { borderBottom: _userpassword._errorstyle, color: '#EB0055' } : { borderBottom: '1px solid #14142B' }} />
                         </label>
                         <div className="footer-title">
                             <p>Ты ещё не с нами?</p>

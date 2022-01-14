@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import useInput from "../../../hooks/use-input";
+import emailjs from '@emailjs/browser';
 import { useNavigate } from "react-router-dom";
 
+import useInput from "../../../hooks/use-input";
 import ModalComponent from "../../../utils/modal.component";
 
 const RegisterComponent = () => {
@@ -18,13 +19,13 @@ const RegisterComponent = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            if(_userlogin.value.length <= 4) {
+            if (_userlogin.value.length <= 4) {
                 setStatus(true);
                 setError('Логин должен состоять минимум из 5-ти символов!');
                 setTimeout(() => {
                     setStatus(false);
                 }, 2500);
-            } 
+            }
 
             const data = { 'userLogin': _userlogin.value, 'userEmail': _useremail.value, 'userPassword': _userpassword.value };
             console.log(data);
@@ -38,6 +39,15 @@ const RegisterComponent = () => {
 
             if (jsonData.status) {
                 localStorage.setItem('user', JSON.stringify(jsonData.user));
+
+                emailjs.send("service_nv3yu3o","template_fh8xw2z", {
+                    toEmail: `${_useremail.value}`,
+                    from_name: "iStudy",
+                    first_message: "Привет, спасибо, что выбрали именно нас!",
+                    second_message: "Наша команда постарается сделать ваш учебный процесс максимально комфортным.",
+                    third_message: "Начни изучать что-то новое для себя прямо сейчас, а мы тебе с этим поможем!",
+                }, 'user_JvHEfKQT1W7Efbdif9sBQ');
+
                 setTimeout(() => {
                     navigate('/', { replace: true });
                 }, 1500);

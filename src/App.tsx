@@ -8,9 +8,9 @@ import { ThemeProvider } from './context/theme-context';
 const App = () => {
   return (
     <ThemeProvider>
-      <Header />
-      <Main />
-      <Footer />
+        <Header />
+        <Main />
+        <Footer />
     </ThemeProvider>
   );
 }

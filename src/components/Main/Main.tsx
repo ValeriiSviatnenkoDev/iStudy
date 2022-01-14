@@ -5,6 +5,9 @@ import HomeComponent from "./components/home.component";
 import NewsComponent from "./components/news.component";
 import RegisterComponent from "./auth/register.component";
 import LoginComponent from "./auth/login.component";
+import ProfileComponent from "./components/profile.component";
+import ContactsComponent from "./components/contacts.component";
+import AboutComponent from "./components/aboutus.component";
 
 const Main = () => {
     return (
@@ -14,8 +17,11 @@ const Main = () => {
                     <Routes>
                         <Route path="/" element={<HomeComponent />} />
                         <Route path="/news" element={<NewsComponent />} />
-                        <Route path="/sign-in" element={<LoginComponent />}/>
+                        <Route path="/sign-in" element={<LoginComponent />} />
                         <Route path="/sign-up" element={<RegisterComponent />} />
+                        <Route path="/profile" element={<ProfileComponent />} />
+                        <Route path="/contacts" element={<ContactsComponent />} />
+                        <Route path="/about-us" element={<AboutComponent />} />
                     </Routes>
                 </BrowserRouter>
             </div>

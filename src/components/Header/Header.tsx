@@ -1,25 +1,27 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import { ThemeContext } from "../../context/theme-context";
 
 const Header = () => {
-    const [switchTheme, setSwitchTheme] = useState(true);
-    const { setTheme } = useContext(ThemeContext);
+    const [theme, setTheme] = useState<boolean>(false);
 
+    const { setSwitchTheme } = useContext(ThemeContext);
     const handleSwitchTheme = () => {
-        setSwitchTheme(prev => !prev);
-        setTheme(switchTheme);
+        setTheme(prev => !prev);
+        setSwitchTheme(theme);
 
-        localStorage.setItem('theme', JSON.stringify(switchTheme));
-
+        localStorage.setItem('theme', JSON.stringify(!theme));
         document.body.classList.toggle('body__theme');
     }
+
+    useEffect(() => {
+    }, [theme, JSON.parse(localStorage.getItem('status_login') || 'false')])
 
     return (
         <header>
             <div className="header__container">
                 <div className="container-logo">
-                   <a href="/"> <i className="fas fa-book-open"></i> iStudy</a>
+                    <a href="/"> <i className="fas fa-book-open"></i> iStudy</a>
                 </div>
 
                 <div className="container-navigation">
@@ -32,16 +34,17 @@ const Header = () => {
 
                 <div className="container-option">
                     <label className="switch">
-                        <input type="checkbox" onChange={() => handleSwitchTheme()}/>
+                        <input type="checkbox" onChange={() => handleSwitchTheme()} defaultChecked={JSON.parse(localStorage.getItem('theme') || 'false')} />
                         <span className="slider round"></span>
                     </label>
-                   {
-                       switchTheme ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>
-                   }
+                    {
+                        JSON.parse(localStorage.getItem('theme') || 'false') ? <i className="fas fa-moon"></i> : <i className="fas fa-sun"></i>
+                    }
                 </div>
-
                 <div className="container-profile">
-                    <a href="/sign-in"><i className="fas fa-user-circle"></i>Sign In</a>
+                   {
+                       JSON.parse(localStorage.getItem('status_login') || 'false') ? <a href="/profile"><i className="fas fa-user-circle"></i>Профиль</a> :  <a href="/sign-in"><i className="fas fa-user-circle"></i>Войти</a>
+                   }
                 </div>
             </div>
         </header>
