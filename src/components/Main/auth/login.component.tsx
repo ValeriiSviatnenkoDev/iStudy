@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import useInput from "../../../hooks/use-input";
-import ModalComponent from "../../../utils/modal.component";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
 
+import ModalComponent from "../../../utils/modal.component";
+import useInput from "../../../hooks/use-input";
+
+import { AuthContext } from "../../../context/auth-context";
 
 const LoginComponent = () => {
     let navigate = useNavigate();
     const _useremail = useInput('', true);
     const _userpassword = useInput('', true);
 
-    const [statusError, setStatus] = useState<boolean>(false);
+    const { setStatus } = useContext(AuthContext);
+
+    const [statusError, setStatusErr] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,14 +31,15 @@ const LoginComponent = () => {
             if (jsonData.status) {
                 localStorage.setItem('user', JSON.stringify(jsonData.user));
                 localStorage.setItem('status_login', JSON.stringify(jsonData.status));
+                setStatus(prev => !prev);
                 setTimeout(() => {
                     navigate('/profile', { replace: true });
                 }, 1500);
             } else {
-                setStatus(true);
+                setStatusErr(true);
                 setError(jsonData.error.message);
                 return setTimeout(() => {
-                    setStatus(false);
+                    setStatusErr(false);
                 }, 2500);
             }
         } catch (error) {
@@ -56,19 +61,19 @@ const LoginComponent = () => {
                 <div className="signin-form">
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="email_user">
-                            <input id="email_user" type="email" placeholder="Ваш логин" {..._useremail} style={_useremail.value.length <= 0 ? { borderBottom: _useremail._errorstyle, color: '#EB0055' } : { borderBottom: '1px solid #14142B' }} />
+                            <input id="email_user" type="email" placeholder="Ваш логин" {..._useremail} style={_useremail.value.length <= 0 ? { borderBottom: _useremail._errorstyle, color: '#EB0055' } : { borderBottom: '1px solid #8d73b6' }} />
                         </label>
                         <label htmlFor="password_user">
-                            <input id="password_user" type="password" placeholder="Ваш пароль" {..._userpassword} style={_userpassword.value.length <= 0 ? { borderBottom: _userpassword._errorstyle, color: '#EB0055' } : { borderBottom: '1px solid #14142B' }} />
+                            <input id="password_user" type="password" placeholder="Ваш пароль" {..._userpassword} style={_userpassword.value.length <= 0 ? { borderBottom: _userpassword._errorstyle, color: '#EB0055' } : { borderBottom: '1px solid #8d73b6' }} />
                         </label>
                         <div className="footer-title">
                             <p>Ты ещё не с нами?</p>
-                            <a href="/sign-up">Зарегистрироваться сейчас</a>
+                            <NavLink to="/sign-up">Создать аккаунт</NavLink>
                             {
-                                error === 'Неверный пароль или эл. почта!' ? <a href="/recovery-page">Забыли пароль?</a> : null
+                                error === 'Неверный пароль или эл. почта!' ? <NavLink to="/recovery-page">Забыли пароль?</NavLink> : null
                             }
                         </div>
-                        <button type="submit">Заходим</button>
+                        <button type="submit">Войти</button>
                     </form>
                 </div>
             </div>

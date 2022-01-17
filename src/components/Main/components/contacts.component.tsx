@@ -6,12 +6,6 @@ const ContactsComponent = () => {
 
     useEffect(() => {
         setLoading(true);
-        const statusTheme = localStorage.getItem('theme');
-
-        if (statusTheme === 'true') {
-            document.body.classList.toggle('body__theme');
-        }
-
         setTimeout(() => {
             setLoading(false);
         }, 3000);

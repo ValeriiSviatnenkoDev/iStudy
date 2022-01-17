@@ -1,29 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/auth-context";
 
 import LoaderComponent from "../../../utils/loader.component";
 
-interface IDataUser {
-    id: string,
-    useremail: string,
-    userlogin: string,
-    userlvl: number,
-    userrole: string,
-    userxp: number,
-}
+import { IUserData } from '../../../interfaces/interfaces-module';
+
 
 const ProfileComponent = () => {
     let navigate = useNavigate();
 
+    const { setStatus } = useContext(AuthContext);
+
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [dataUser, setData] = useState<IDataUser>({
-        id: '',
-        useremail: '',
-        userlogin: '',
-        userlvl: 0,
-        userrole: '',
-        userxp: 0,
-    });
+    const [dataUser, setData] = useState<IUserData>({} as IUserData);
 
     const handleLoadData = () => {
         setLoading(true);
@@ -37,16 +27,11 @@ const ProfileComponent = () => {
     const handleLogOut = () => {
         localStorage.removeItem('user');
         localStorage.removeItem('status_login');
+        setStatus(prev => !prev);
         navigate('/', { replace: true });
     }
 
     useEffect(() => {
-        const statusTheme = localStorage.getItem('theme');
-
-        if (statusTheme === 'true') {
-            document.body.classList.toggle('body__theme');
-        }
-
         handleLoadData();
     }, []);
 

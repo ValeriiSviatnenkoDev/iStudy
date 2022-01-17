@@ -3,7 +3,6 @@ import emailjs from '@emailjs/browser';
 
 import useInput from "../../../hooks/use-input";
 import LoaderComponent from "../../../utils/loader.component";
-import { error } from "console";
 import ModalComponent from "../../../utils/modal.component";
 
 const AboutComponent = () => {
@@ -39,12 +38,6 @@ const AboutComponent = () => {
 
     useEffect(() => {
         setLoading(true);
-        const statusTheme = localStorage.getItem('theme');
-
-        if (statusTheme === 'true') {
-            document.body.classList.toggle('body__theme');
-        }
-
         setTimeout(() => {
             setLoading(false);
         }, 3000);

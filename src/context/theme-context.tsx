@@ -8,7 +8,7 @@ interface IThemeContext {
 export const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
 
 export const ThemeProvider = (props:React.PropsWithChildren<{ }>) => {
-    const [switchTheme, setSwitchTheme] = useState<boolean>(false);
+    const [switchTheme, setSwitchTheme] = useState<boolean>(JSON.parse(localStorage.getItem('theme') as string));
 
     return(
         <ThemeContext.Provider value={{switchTheme, setSwitchTheme}}>

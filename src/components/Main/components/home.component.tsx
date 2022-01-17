@@ -1,15 +1,4 @@
-import React, { useEffect } from "react";
-
 const HomeComponent = () => {
-    useEffect(() => {
-        const statusTheme = localStorage.getItem('theme');
-
-        if(statusTheme === 'true') {
-            document.body.classList.toggle('body__theme');
-        }
-
-    }, []);
-
     return (
         <>
             <div className="main__content">
